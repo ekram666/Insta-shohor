@@ -1,14 +1,18 @@
 let posts=[ ];
 
 const likedPostsId = [];
-const reportedPostsId = [];
+let reportedPostsId = [];
+let showReportedId = [];
 
 const getLikedPosts = () => {
     return posts.filter((post) => likedPostsId.includes(post.id));
 };
 
 const getReportedPosts = () => {
-    return posts.filter((post) => reportedPostsId.includes(post.id));
+  
+    let reportId = posts.filter((post) => reportedPostsId.includes(post.id));
+    showReportedId = [];
+    return reportId;
 };
 
 const isLiked = (id) => {
@@ -22,6 +26,7 @@ const addToLiked = (id) => {
 
 const reportPost = (id) => {
     reportedPostsId.push(id);
+    showReportedId.push(id);
     const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
     showPosts(remainingPosts);
 };
@@ -152,7 +157,7 @@ const displayLikedPosts = () => {
 
 const displayReportedPosts = () => {
     const reportedPosts = getReportedPosts();
-    posts.forEach((post) => {
+    reportedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "reported" ).appendChild(div);
     });
