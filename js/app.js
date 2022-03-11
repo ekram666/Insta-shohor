@@ -1,13 +1,17 @@
 let posts=[ ];
 
-const likedPostsId = [];
+let likedPostsId = [];
+let showPostsId = []; // push liked id , clearing liked id 
+
 let reportedPostsId = [];
-let showReportedId = [];
+let showReportedId = [];   // push report id and reported id is clear
 
 let likePosts = [];
 
 const getLikedPosts = () => {
-    return posts.filter((post) => likedPostsId.includes(post.id));
+    let likedPosts = posts.filter((post) => likedPostsId.includes(post.id));
+    showPostsId = [];
+    return likedPosts;
 };
 
 const getReportedPosts = () => {
